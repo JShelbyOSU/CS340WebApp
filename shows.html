@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Databases: Penguins</title>
+</head>
+<body>
+    <header>
+        <h1>Penguin Conservation Center</h1>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="shows.html">Shows</a>
+        <a href="penguins.html">Penguins</a>
+        <a href="employees.html">Employees</a>
+    </nav>
+
+    <main>
+        <h2>Shows</h2>
+        <div>
+            <a href="#" onClick="showform('create')">Add New</a>
+        </div>
+        <div>
+            <table border="1">
+                <tr>
+                    <th>Show ID</th>
+                    <th>Show Name</th>
+                    <th>Date</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Ticket Price</th>
+                    <th>Habitat ID</th>
+                    <th>Penguins</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Penguin Diving</td>
+                    <td>2023-11-25</td>
+                    <td>10:00 AM</td>
+                    <td>11:00 AM</td>
+                    <td>$15.00</td>
+                    <td>1</td>
+                    <td>Pingu</td>
+                    <td><a href="#" onClick="showform('update')">Edit</a></td>
+                    <td><a href="#" onClick="showform('delete')">Delete</a></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Ice Slide</td>
+                    <td>2023-12-02</td>
+                    <td>02:00 PM</td>
+                    <td>03:00 PM</td>
+                    <td>$20.00</td>
+                    <td>2</td>
+                    <td>Penny</td>
+                    <td><a href="#" onClick="showform('update')">Edit</a></td>
+                    <td><a href="#" onClick="showform('delete')">Delete</a></td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="update">
+            <form method="POST" id="update">
+                <legend>Edit Show</legend>
+                <fieldset>
+                <label for="showName">Show Name:</label>
+                <input type="text" id="showName" name="showName">
+        
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date">
+        
+                <label for="startTime">Start Time:</label>
+                <input type="time" id="startTime" name="startTime">
+        
+                <label for="endTime">End Time:</label>
+                <input type="time" id="endTime" name="endTime">
+        
+                <label for="ticketPrice">Ticket Price:</label>
+                <input type="number" step="0.01" id="ticketPrice" name="ticketPrice">
+        
+                <label for="habitat">Habitat:</label>
+                <select id="habitat" name="habitat">
+                    <option value="forest">Forest</option>
+                    <option value="ocean">Ocean</option>
+                    <option value="desert">Desert</option>
+                    <option value="jungle">Jungle</option>
+                    <!-- Add more options as needed -->
+                </select>
+        
+                <label for="penguins">Penguins:</label>
+                <ul>
+                    <li><input type="checkbox" id="penguin1" name="penguins" value="Penguin 1"> Penguin 1</li>
+                    <li><input type="checkbox" id="penguin2" name="penguins" value="Penguin 2"> Penguin 2</li>
+                    <li><input type="checkbox" id="penguin3" name="penguins" value="Penguin 3"> Penguin 3</li>
+                    <!-- Add more checkboxes for additional penguins -->
+                </ul>
+                </fieldset>
+        
+                <input type="submit" value="Submit">
+                <input type="submit" value="Cancel">
+            </form>
+        </div>
+
+        <div id="create">
+            <form method="POST" id="create">
+                <legend>Create Show</legend>
+                <fieldset>
+                <label for="showName">Show Name:</label>
+                <input type="text" id="showName" name="showName">
+        
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date">
+        
+                <label for="startTime">Start Time:</label>
+                <input type="time" id="startTime" name="startTime">
+        
+                <label for="endTime">End Time:</label>
+                <input type="time" id="endTime" name="endTime">
+        
+                <label for="ticketPrice">Ticket Price:</label>
+                <input type="number" step="0.01" id="ticketPrice" name="ticketPrice">
+        
+                <label for="habitat">Habitat:</label>
+                <select id="habitat" name="habitat">
+                    <option value="forest">Forest</option>
+                    <option value="ocean">Ocean</option>
+                    <option value="desert">Desert</option>
+                    <option value="jungle">Jungle</option>
+                    <!-- Add more options as needed -->
+                </select>
+        
+                <label for="penguins">Penguins:</label>
+                <ul>
+                    <li><input type="checkbox" id="penguin1" name="penguins" value="Penguin 1"> Penguin 1</li>
+                    <li><input type="checkbox" id="penguin2" name="penguins" value="Penguin 2"> Penguin 2</li>
+                    <li><input type="checkbox" id="penguin3" name="penguins" value="Penguin 3"> Penguin 3</li>
+                    <!-- Add more checkboxes for additional penguins -->
+                </ul>
+                </fieldset>
+        
+                <input type="submit" value="Submit">
+                <input type="submit" value="Cancel">
+            </form>
+        </div>
+    </main>
+
+    <footer>
+    <p>2023, Justyn Shelby and Michael Wilson</p>
+    </footer>
+
+</body>
+</html>
