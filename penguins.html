@@ -19,6 +19,115 @@
 
     <main>
         <h2>Penguins</h2>
+        <div>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Birthday</th>
+                    <th>Sex</th>
+                    <th>Species</th>
+                    <th>Habitat</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Penny</td>
+                    <td>2018-05-10</td>
+                    <td>Male</td>
+                    <td>Emperor</td>
+                    <td>Ocean</td>
+                    <td><a href="#" onClick="showform('update')">Edit</a></td>
+                    <td><a href="#" onClick="showform('delete')">Delete</a></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Pingu</td>
+                    <td>2017-03-15</td>
+                    <td>Female</td>
+                    <td>King</td>
+                    <td>Arctic</td>
+                    <td><a href="#" onClick="showform('update')">Edit</a></td>
+                    <td><a href="#" onClick="showform('delete')">Delete</a></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Noot</td>
+                    <td>2019-08-20</td>
+                    <td>Female</td>
+                    <td>Adelie</td>
+                    <td>Costal</td>
+                    <td><a href="#" onClick="showform('update')">Edit</a></td>
+                    <td><a href="#" onClick="showform('delete')">Delete</a></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+        <div id="update">
+            <form method="POST" id="update">
+                <legend>Edit Penguin</legend>
+                <fieldset>
+
+                <label for="updateName">Name:</label>
+                <input type="text" id="updateName" name="name" title="Name">
+            
+                <label for="updateBirthday">Birthday:</label>
+                <input type="date" id="updateBirthday" name="birthday" title="Birthday">
+            
+                <label for="updateSex">Sex:</label>
+                <select id="updateSex" name="sex" title="Sex">
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+            
+                <label for="updateSpecies">Species:</label>
+                <input type="text" id="updateSpecies" name="species" title="Species">
+            
+                <label for="updateHabitat">Habitat:</label>
+                <select id="updateHabitat" name="habitat" title="Habitat">
+                    <option value="costal">Costal</option>
+                    <option value="arctic">Arctic</option>
+                    <option value="ocean">Ocean</option>
+                    <option value="tundra">Tundra</option>
+                </select>
+
+                </fieldset>
+                <input type="submit" value="Submit">
+                <input type="submit" value="Cancel">
+                <hr>
+
+                <legend>Add Penguin</legend>
+                <fieldset>
+
+                <label for="createName">Name:</label>
+                <input type="text" id="createName" name="name" title="Name">
+            
+                <label for="createBirthday">Birthday:</label>
+                <input type="date" id="createBirthday" name="birthday" title="Birthday">
+            
+                <label for="createSex">Sex:</label>
+                <select id="createSex" name="sex" title="Sex">
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+            
+                <label for="createSpecies">Species:</label>
+                <input type="text" id="createSpecies" name="species" title="Species">
+            
+                <label for="createHabitat">Habitat:</label>
+                <select id="createHabitat" name="habitat" title="Habitat">
+                    <option value="costal">Costal</option>
+                    <option value="arctic">Arctic</option>
+                    <option value="ocean">Ocean</option>
+                    <option value="tundra">Tundra</option>
+                </select>
+
+                </fieldset>
+                <input type="submit" value="Submit">
+                <input type="submit" value="Cancel">
+            </form>
+        </div>
     </main>
 
     <footer>

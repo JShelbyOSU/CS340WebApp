@@ -23,7 +23,7 @@
             <a href="#" onClick="showform('create')">Add New</a>
         </div>
         <div>
-            <table border="1">
+            <table>
                 <tr>
                     <th>Show ID</th>
                     <th>Show Name</th>
@@ -62,41 +62,48 @@
                 </tr>
             </table>
         </div>
-
+        <hr>
         <div id="update">
             <form method="POST" id="update">
                 <legend>Edit Show</legend>
                 <fieldset>
                 <label for="showName">Show Name:</label>
-                <input type="text" id="showName" name="showName">
+                <input name="showName" type="text" id="updateShowName" name="showName" title="Show Name">
         
                 <label for="date">Date:</label>
-                <input type="date" id="date" name="date">
+                <input type="date" id="updateDate" name="date" title="Date">
         
                 <label for="startTime">Start Time:</label>
-                <input type="time" id="startTime" name="startTime">
+                <input type="time" id="updateStartTime" name="startTime" title="Start Time">
         
                 <label for="endTime">End Time:</label>
-                <input type="time" id="endTime" name="endTime">
+                <input type="time" id="updateEndTime" name="endTime" title="End Time">
         
                 <label for="ticketPrice">Ticket Price:</label>
-                <input type="number" step="0.01" id="ticketPrice" name="ticketPrice">
+                <input type="number" step="0.05" id="updateTicketPrice" name="ticketPrice" title="Ticket Price">
         
                 <label for="habitat">Habitat:</label>
-                <select id="habitat" name="habitat">
-                    <option value="forest">Forest</option>
+                <select id="updateHabitat" name="habitat" title="Habitat">
+                    <option value="costal">Costal</option>
+                    <option value="arctic">Arctic</option>
                     <option value="ocean">Ocean</option>
-                    <option value="desert">Desert</option>
-                    <option value="jungle">Jungle</option>
-                    <!-- Add more options as needed -->
+                    <option value="tundra">Tundra</option>
                 </select>
-        
+                <hr>
                 <label for="penguins">Penguins:</label>
                 <ul>
-                    <li><input type="checkbox" id="penguin1" name="penguins" value="Penguin 1"> Penguin 1</li>
-                    <li><input type="checkbox" id="penguin2" name="penguins" value="Penguin 2"> Penguin 2</li>
-                    <li><input type="checkbox" id="penguin3" name="penguins" value="Penguin 3"> Penguin 3</li>
-                    <!-- Add more checkboxes for additional penguins -->
+                    <li>
+                        <input type="checkbox" id="updatePenguin1" name="penguins" value="Penguin 1">
+                        <label for="updatePenguin1">Penguin 1</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="updatePenguin2" name="penguins" value="Penguin 2">
+                        <label for="updatePenguin2">Penguin 2</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="updatePenguin3" name="penguins" value="Penguin 3">
+                        <label for="updatePenguin3">Penguin 3</label>
+                    </li>
                 </ul>
                 </fieldset>
         
@@ -104,47 +111,55 @@
                 <input type="submit" value="Cancel">
             </form>
         </div>
-
+        <hr>
         <div id="create">
             <form method="POST" id="create">
                 <legend>Create Show</legend>
                 <fieldset>
                 <label for="showName">Show Name:</label>
-                <input type="text" id="showName" name="showName">
+                <input name="showName" type="text" id="createShowName" name="showName" title="Show Name">
         
                 <label for="date">Date:</label>
-                <input type="date" id="date" name="date">
+                <input type="date" id="createDate" name="date" title="Date">
         
                 <label for="startTime">Start Time:</label>
-                <input type="time" id="startTime" name="startTime">
+                <input type="time" id="createStartTime" name="startTime" title="Start Time">
         
                 <label for="endTime">End Time:</label>
-                <input type="time" id="endTime" name="endTime">
+                <input type="time" id="createEndTime" name="endTime" title="End Time">
         
                 <label for="ticketPrice">Ticket Price:</label>
-                <input type="number" step="0.01" id="ticketPrice" name="ticketPrice">
+                <input type="number" step="0.05" id="createTicketPrice" name="ticketPrice" title="Ticket Price">
         
                 <label for="habitat">Habitat:</label>
-                <select id="habitat" name="habitat">
+                <select id="createHabitat" name="habitat" title="Habitat">
                     <option value="forest">Forest</option>
                     <option value="ocean">Ocean</option>
                     <option value="desert">Desert</option>
                     <option value="jungle">Jungle</option>
-                    <!-- Add more options as needed -->
                 </select>
-        
+                <hr>
                 <label for="penguins">Penguins:</label>
                 <ul>
-                    <li><input type="checkbox" id="penguin1" name="penguins" value="Penguin 1"> Penguin 1</li>
-                    <li><input type="checkbox" id="penguin2" name="penguins" value="Penguin 2"> Penguin 2</li>
-                    <li><input type="checkbox" id="penguin3" name="penguins" value="Penguin 3"> Penguin 3</li>
-                    <!-- Add more checkboxes for additional penguins -->
+                    <li>
+                        <input type="checkbox" id="createPenguin1" name="penguins" value="Penguin 1">
+                        <label for="createPenguin1">Penguin 1</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="createPenguin2" name="penguins" value="Penguin 2">
+                        <label for="createPenguin2">Penguin 2</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="createPenguin3" name="penguins" value="Penguin 3">
+                        <label for="createPenguin3">Penguin 3</label>
+                    </li>
                 </ul>
                 </fieldset>
-        
+                <hr>
                 <input type="submit" value="Submit">
                 <input type="submit" value="Cancel">
             </form>
+            
         </div>
     </main>
 
