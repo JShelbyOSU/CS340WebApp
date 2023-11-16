@@ -33,12 +33,19 @@
     </div>
     <hr>
     <div id="update">
-        <form method="POST" id="update">
+        <form method="POST" id="updatePenguin">
             <legend>Edit Penguin</legend>
             <fieldset>
 
+            <label for="penguinID">ID:</label>
+            <select id="penguinID" name="penguinID" title="Penguin ID">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+
             <label for="updateName">Name:</label>
-            <input type="text" id="updateName" name="name" title="Name">
+            <input type="text" id="updateName" name="name" title="Name" required pattern="[A-Za-z]+(?: [A-Za-z]+)*">
         
             <label for="updateBirthday">Birthday:</label>
             <input type="date" id="updateBirthday" name="birthday" title="Birthday">
@@ -60,16 +67,32 @@
                 <option value="tundra">Tundra</option>
             </select>
 
+            <hr>
+            <div>
+                <label for="shows">Shows:</label>
+                    <input type="checkbox" id="updateShow1" name="employees" value="Show 1">
+                    <label for="updateShow1">Show 1</label>
+
+                    <input type="checkbox" id="updateShow2" name="employees" value="Show 2">
+                    <label for="updateShow2">Show 2</label>
+
+                    <input type="checkbox" id="updateShow3" name="employees" value="Show 3">
+                    <label for="updateShow3">Show 3</label>
+            </div>
+
             </fieldset>
             <input type="submit" value="Submit">
             <input type="submit" value="Cancel">
             <hr>
-
+        </form>
+    </div>
+    <div id="create"></div>
+        <form method="POST" id="createPenguin">
             <legend>Add Penguin</legend>
             <fieldset>
 
             <label for="createName">Name:</label>
-            <input type="text" id="createName" name="name" title="Name">
+            <input type="text" id="createName" name="name" title="Name" required pattern="[A-Za-z]+(?: [A-Za-z]+)*">
         
             <label for="createBirthday">Birthday:</label>
             <input type="date" id="createBirthday" name="birthday" title="Birthday">
@@ -90,6 +113,18 @@
                 <option value="ocean">Ocean</option>
                 <option value="tundra">Tundra</option>
             </select>
+            <hr>
+            <div>
+                <label for="shows">Shows:</label>
+                    <input type="checkbox" id="createShow1" name="employees" value="Show 1">
+                    <label for="createShow1">Show 1</label>
+
+                    <input type="checkbox" id="createShow2" name="employees" value="Show 2">
+                    <label for="createShow2">Show 2</label>
+                    
+                    <input type="checkbox" id="createShow3" name="employees" value="Show 3">
+                    <label for="createShow3">Show 3</label>
+            </div>
 
             </fieldset>
             <input type="submit" value="Submit">

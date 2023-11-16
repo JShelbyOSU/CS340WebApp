@@ -56,49 +56,78 @@
             <fieldset>
 
             <label for="updateFirstName">First Name:</label>
-            <input type="text" id="updateFirstName" name="firstName" title="First Name">
+            <input type="text" id="updateFirstName" name="firstName" title="First Name" required pattern="[A-Za-z]+(?: [A-Za-z]+)*">
         
             <label for="updateLastName">Last Name:</label>
-            <input type="text" id="updateLastName" name="lastName" title="Last Name">
+            <input type="text" id="updateLastName" name="lastName" title="Last Name" required pattern="[A-Za-z]+(?: [A-Za-z]+)*">
         
             <label for="updatePosition">Position:</label>
-            <input type="text" id="updatePosition" name="position" title="Position">
+            <input type="text" id="updatePosition" name="position" title="Position" style="width:120px;">
         
             <label for="updateHireDate">Hire Date:</label>
             <input type="date" id="updateHireDate" name="hireDate" title="Hire Date">
         
             <label for="updateSalary">Salary:</label>
-            <input type="number" step="10" id="updateSalary" name="salary" title="Salary">
+            <input type="number" step="10" id="updateSalary" name="salary" title="Salary" style="width:50px;" min="10000" max = "99999">
         
             <label for="updateHabitatID">Habitat ID:</label>
-            <input type="number" id="updateHabitatID" name="habitatID" title="Habitat ID">
+            <input type="number" id="updateHabitatID" name="habitatID" title="Habitat ID" style="width:40px;" pattern="\d+" min="0">
+
+            <hr>
+            <div>
+                <label for="shows">Shows:</label>
+                    <input type="checkbox" id="updateShow1" name="employees" value="Show 1">
+                    <label for="updateShow1">Show 1</label>
+
+                    <input type="checkbox" id="updateShow2" name="employees" value="Show 2">
+                    <label for="updateShow2">Show 2</label>
+
+                    <input type="checkbox" id="updateShow3" name="employees" value="Show 3">
+                    <label for="updateShow3">Show 3</label>
+            </div>
 
             </fieldset>
             <input type="submit" value="Submit">
             <input type="submit" value="Cancel">
             
             <hr>
+        </form>
+    </div>
+    <div id="create">
+        <form method="POST" id="createEmployee">
 
             <legend>Add Employee</legend>
             <fieldset>
 
             <label for="createFirstName">First Name:</label>
-            <input type="text" id="createFirstName" name="firstName" title="First Name">
+            <input type="text" id="createFirstName" name="firstName" title="First Name" required pattern="[A-Za-z]+(?: [A-Za-z]+)*">
         
             <label for="createLastName">Last Name:</label>
-            <input type="text" id="createLastName" name="lastName" title="Last Name">
+            <input type="text" id="createLastName" name="lastName" title="Last Name" required pattern="[A-Za-z]+(?: [A-Za-z]+)*">
         
             <label for="createPosition">Position:</label>
-            <input type="text" id="createPosition" name="position" title="Position">
+            <input type="text" id="createPosition" name="position" title="Position" style="width:120px;">
         
             <label for="createHireDate">Hire Date:</label>
             <input type="date" id="createHireDate" name="hireDate" title="Hire Date">
         
             <label for="createSalary">Salary:</label>
-            <input type="number" step="10" id="createSalary" name="salary" title="Salary">
+            <input type="number" step="10" id="createSalary" name="salary" title="Salary" style="width:60px;" min="10000" max = "99999">
         
             <label for="createHabitatID">Habitat ID:</label>
-            <input type="number" id="createHabitatID" name="habitatID" title="Habitat ID">
+            <input type="number" id="createHabitatID" name="habitatID" title="Habitat ID" style="width:40px;" pattern="\d+" min="0">
+            <hr>
+            <div>
+                <label for="shows">Shows:</label>
+                    <input type="checkbox" id="createShow1" name="employees" value="Show 1">
+                    <label for="createShow1">Show 1</label>
+
+                    <input type="checkbox" id="createShow2" name="employees" value="Show 2">
+                    <label for="createShow2">Show 2</label>
+
+                    <input type="checkbox" id="createShow3" name="employees" value="Show 3">
+                    <label for="createShow3">Show 3</label>
+            </div>
 
             </fieldset>
             <input type="submit" value="Submit">
