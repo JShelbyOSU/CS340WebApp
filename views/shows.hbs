@@ -2,46 +2,34 @@
 <main>
     <h2>Shows</h2>
     <div>
-        <a href="#" onClick="showform('create')">Add New</a>
-    </div>
-    <div>
-        <table>
+        <table id="showsTable">
+
+            <thead>
             <tr>
-                <th>Show ID</th>
-                <th>Show Name</th>
-                <th>Date</th>
-                <th>Start Time</th>
-                <th>End Time</th>
-                <th>Ticket Price</th>
-                <th>Habitat ID</th>
-                <th>Penguins</th>
-                <th></th>
+                {{#each data.[0]}}
+                <th>{{@key}}</th>
+                {{/each}}
                 <th></th>
             </tr>
+            </thead>
+
+            <tbody>
+            {{#each data}}
             <tr>
-                <td>1</td>
-                <td>Penguin Diving</td>
-                <td>2023-11-25</td>
-                <td>10:00 AM</td>
-                <td>11:00 AM</td>
-                <td>$15.00</td>
-                <td>1</td>
-                <td>Pingu</td>
-                <td><a href="#" onClick="showform('update')">Edit</a></td>
-                <td><a href="#" onClick="showform('delete')">Delete</a></td>
+                <td>{{this.showID}}</td>
+                <td>{{this.showName}}</td>
+                <td>{{this.date}}</td>
+                <td>{{this.startTime}}</td>
+                <td>{{this.endTime}}</td>
+                <td>{{this.ticketPrice}}</td>
+                <td>{{this.habitatID}}</td>
+                <td>{{this.name}}</td>
+                <td>{{this.lastName}}</td>
+                <td><button onclick="deleteShow({{this.showID}});">Delete</button></td>
             </tr>
-            <tr>
-                <td>2</td>
-                <td>Ice Slide</td>
-                <td>2023-12-02</td>
-                <td>02:00 PM</td>
-                <td>03:00 PM</td>
-                <td>$20.00</td>
-                <td>2</td>
-                <td>Penny</td>
-                <td><a href="#" onClick="showform('update')">Edit</a></td>
-                <td><a href="#" onClick="showform('delete')">Delete</a></td>
-            </tr>
+            {{/each}}
+            </tbody>
+
         </table>
     </div>
     <hr>
@@ -50,56 +38,48 @@
             <legend>Edit Show</legend>
             <fieldset>
 
-            <label for="showID">ID:</label>
-            <select id="showID" name="showID" title="Show ID">
-                <option value="1">1</option>
-                <option value="2">2</option>
+            <label for="selectShowID">ID:</label>
+            <select id="selectShowID" name="selectShowID" title="Show ID">
+                {{#each data}}
+                <option value="{{this.showID}}">{{this.showID}}</option>
+                {{/each}}
             </select>
 
-            <label for="showName">Show Name:</label>
-            <input name="showName" type="text" id="updateShowName" name="showName" title="Show Name">
+            <label for="updateShowName">Show Name:</label>
+            <input name="updateShowName" type="text" id="updateShowName" name="showName" title="Show Name">
     
-            <label for="date">Date:</label>
+            <label for="updateDate">Date:</label>
             <input type="date" id="updateDate" name="date" title="Date">
     
-            <label for="startTime">Start Time:</label>
+            <label for="updateStartTime">Start Time:</label>
             <input type="time" id="updateStartTime" name="startTime" title="Start Time">
     
-            <label for="endTime">End Time:</label>
+            <label for="updateEndTime">End Time:</label>
             <input type="time" id="updateEndTime" name="endTime" title="End Time">
     
-            <label for="ticketPrice">Ticket Price:</label>
-            <input type="number" step="0.05" id="updateTicketPrice" name="ticketPrice" title="Ticket Price" style="width:50px;" style="width:50px;" min=0 max="99">
+            <label for="updateTicketPrice">Ticket Price:</label>
+            <input type="number" step="0.05" id="updateTicketPrice" name="ticketPrice" title="Ticket Price" style="width:50px;" min=0 max="99">
     
-            <label for="habitat">Habitat:</label>
-            <select id="updateHabitat" name="habitat" title="Habitat">
-                <option value="costal">Costal</option>
-                <option value="arctic">Arctic</option>
-                <option value="ocean">Ocean</option>
-                <option value="tundra">Tundra</option>
+            <label for="updateHabitatID">Habitat:</label>
+            <select id="updateHabitatID" name="updateHabitatID" title="Habitat">
+                {{#each habitats}}
+                <option value="{{this.habitatID}}">{{this.habitatID}}</option>
+                {{/each}}
             </select>
             <hr>
             <div style="float: left; width: 50%;">
-                <label for="penguins">Penguins:</label>
-                    <input type="checkbox" id="updatePenguin1" name="penguins" value="Penguin 1">
-                    <label for="updatePenguin1">Penguin 1</label>
-
-                    <input type="checkbox" id="updatePenguin2" name="penguins" value="Penguin 2">
-                    <label for="updatePenguin2">Penguin 2</label>
-
-                    <input type="checkbox" id="updatePenguin3" name="penguins" value="Penguin 3">
-                    <label for="updatePenguin3">Penguin 3</label>
+                <label for="updatePenguinID">Penguins:</label>
+                    {{#each penguins}}
+                    <input type="checkbox" id="updatePenguinID" name="updatePenguinID" value="{{this.penguinID}}">
+                    <label for="updatePenguinID">{{this.penguinID}}</label>
+                    {{/each}}
             </div>
             <div style="float: left; width: 50%;">
-                <label for="employees">Employees:</label>
-                    <input type="checkbox" id="updateEmployee1" name="employees" value="Employee 1">
-                    <label for="updateEmployee1">Employee 1</label>
-
-                    <input type="checkbox" id="updateEmployee2" name="employees" value="Employee 2">
-                    <label for="updateEmployee2">Employee 2</label>
-
-                    <input type="checkbox" id="updateEmployee3" name="employees" value="Employee 3">
-                    <label for="updateEmployee3">Employee 3</label>
+                <label for="updateEmployeeID">Employees:</label>
+                    {{#each employees}}
+                    <input type="checkbox" id="updateEmployeeID" name="updateEmployeeID" value="{{this.employeeID}}">
+                    <label for="updateEmployeeID">{{this.employeeID}}</label>
+                    {{/each}}
             </div>
             
             </fieldset>
@@ -108,61 +88,58 @@
             <input type="submit" value="Cancel">
         </form>
     </div>
+
     <hr>
-    <div id="create">
-        <form method="POST" id="createShow">
-            <legend>Create Show</legend>
+
+    <div id="create"></div>
+        <form id="createShowForm">
+            <legend>Add Show</legend>
             <fieldset>
 
-            <label for="showName">Show Name:</label>
-            <input name="showName" type="text" id="createShowName" name="showName" title="Show Name">
+            <label for="createshowName">Show Name:</label>
+            <input type="text" id="createShowName" name="showName" title="Show Name">
     
-            <label for="date">Date:</label>
-            <input type="date" id="createDate" name="date" title="Date">
+            <label for="createdate">Date:</label>
+            <input type="date" id="createdate" name="date" title="Date">
     
-            <label for="startTime">Start Time:</label>
-            <input type="time" id="createStartTime" name="startTime" title="Start Time">
+            <label for="createstartTime">Start Time:</label>
+            <input type="time" id="createstartTime" name="createstartTime" title="Start Time">
     
-            <label for="endTime">End Time:</label>
-            <input type="time" id="createEndTime" name="endTime" title="End Time">
+            <label for="createendTime">End Time:</label>
+            <input type="time" id="createendTime" name="createendTime" title="End Time">
     
-            <label for="ticketPrice">Ticket Price:</label>
-            <input type="number" step="0.05" id="createTicketPrice" name="ticketPrice" title="Ticket Price" style="width:50px;" min=0 max="99">
+            <label for="createticketPrice">Ticket Price:</label>
+            <input type="number" step="0.05" id="createticketPrice" name="createticketPrice" title="Ticket Price" style="width:50px;" min=0 max="99">
     
-            <label for="habitat">Habitat:</label>
-            <select id="createHabitat" name="habitat" title="Habitat">
-                <option value="costal">Costal</option>
-                <option value="arctic">Arctic</option>
-                <option value="ocean">Ocean</option>
-                <option value="tundra">Tundra</option>
+            <label for="createhabitatID">Habitat:</label>
+            <select id="createhabitatID" name="createhabitatID" title="Habitat">
+                {{#each habitats}}
+                <option value="{{this.habitatID}}">{{this.habitatID}}</option>
+                {{/each}}
             </select>
             <hr>
             <div style="float: left; width: 50%;">
                 <label for="penguins">Penguins:</label>
-                    <input type="checkbox" id="createPenguin1" name="penguins" value="Penguin 1">
-                    <label for="createPenguin1">Penguin 1</label>
-
-                    <input type="checkbox" id="createPenguin2" name="penguins" value="Penguin 2">
-                    <label for="createPenguin2">Penguin 2</label>
-                    
-                    <input type="checkbox" id="createPenguin3" name="penguins" value="Penguin 3">
-                    <label for="createPenguin3">Penguin 3</label>
+                    {{#each penguins}}
+                    <input type="checkbox" id="createPenguinID" name="penguins" value="{{this.penguinID}}">
+                    <label for="createPenguinID">{{this.penguinID}}</label>
+                    {{/each}}
             </div>
             <div style="float: left; width: 50%;">
                 <label for="employees">Employees:</label>
-                    <input type="checkbox" id="createEmployee1" name="employees" value="Employee 1">
-                    <label for="createEmployee1">Employee 1</label>
-
-                    <input type="checkbox" id="createEmployee2" name="employees" value="Employee 2">
-                    <label for="createEmployee2">Employee 2</label>
-                    
-                    <input type="checkbox" id="createEmployee3" name="employees" value="Employee 3">
-                    <label for="createEmployee3">Employee 3</label>
+                    {{#each employees}}
+                    <input type="checkbox" id="createEmployeeID" name="employees" value="{{this.employeeID}}">
+                    <label for="createEmployeeID">{{this.employeeID}}</label>
+                    {{/each}}
             </div>
             </fieldset>
             <input type="submit" value="Submit">
             <input type="submit" value="Cancel">
         </form>
         
+        <script src="./js/createShow.js"></script>
+        <script src="./js/deleteShow.js"></script>
+        <script src="./js/updateShow.js"></script>
+
     </div>
 </main>
