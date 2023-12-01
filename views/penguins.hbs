@@ -2,7 +2,7 @@
 <main>
     <h2>Penguins</h2>
     <div>
-        <table>
+        <table id="penguinsTable">
 
             <thead>
             <tr>
@@ -16,57 +16,59 @@
 
             <tbody>
             {{#each data}}
-            <tr>
+            <tr data-value={{this.penguinID}}>
                 <td>{{this.penguinID}}</td>
                 <td>{{this.name}}</td>
                 <td>{{this.dateOfBirth}}</td>
                 <td>{{this.sex}}</td>
                 <td>{{this.species}}</td>
                 <td>{{this.habitatID}}</td>
-                <td><a href="#" onClick="showform('update')">Edit</a></td>
-                <td><a href="#" onClick="showform('delete')">Delete</a></td>
+                <td><button onclick="deletePenguin({{this.penguinID}})">Delete</button></td>
             </tr>
             {{/each}}
             </tbody>
 
         </table>
+        <script src="./js/deletePenguin.js"></script>
     </div>
     <hr>
     <div id="update">
-        <form method="POST" id="updatePenguin">
+        <form id="updatePenguin">
             <legend>Edit Penguin</legend>
             <fieldset>
 
-            <label for="penguinID">ID:</label>
-            <select id="penguinID" name="penguinID" title="Penguin ID">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
+            <label for="selectPenguinID">ID:</label>
+            <select id="selectPenguinID" name="selectPenguinID" title="Penguin ID">
+                <option value="Select"></option>
+                {{#each data}}
+                <option value="{{this.penguinID}}">{{this.penguinID}}</option>
+                {{/each}}
             </select>
-
+            
             <label for="updateName">Name:</label>
             <input type="text" id="updateName" name="name" title="Name" required pattern="[A-Za-z]+(?: [A-Za-z]+)*">
         
-            <label for="updateBirthday">Birthday:</label>
-            <input type="date" id="updateBirthday" name="birthday" title="Birthday">
+            <label for="updatedateOfBirth">Birth Date:</label>
+            <input type="date" id="updatedateOfBirth" name="dateOfBirth" title="dateOfBirth" required min="1900-01-01" max="2030-12-31">
         
             <label for="updateSex">Sex:</label>
-            <select id="updateSex" name="sex" title="Sex">
+            <select id="updateSex" name="sex" title="Sex" required>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
             </select>
         
             <label for="updateSpecies">Species:</label>
-            <input type="text" id="updateSpecies" name="species" title="Species">
-        
-            <label for="updateHabitat">Habitat:</label>
-            <select id="updateHabitat" name="habitat" title="Habitat">
-                <option value="costal">Costal</option>
-                <option value="arctic">Arctic</option>
-                <option value="ocean">Ocean</option>
-                <option value="tundra">Tundra</option>
+            <input type="text" id="updateSpecies" name="species" title="Species" required pattern="[A-Za-z]+(?: [A-Za-z]+)*">
+
+            <label for="updateHabitatID">Habitat ID:</label>
+            <select id="updateHabitatID" name="updateHabitatID" title="Habitat ID">
+                <option value="Select"></option>
+                {{#each habitats}}
+                <option value="{{this.habitatID}}">{{this.habitatID}}</option>
+                {{/each}}
             </select>
 
+            {{!-- 
             <hr>
             <div>
                 <label for="shows">Shows:</label>
@@ -78,42 +80,44 @@
 
                     <input type="checkbox" id="updateShow3" name="employees" value="Show 3">
                     <label for="updateShow3">Show 3</label>
-            </div>
+            </div> --}}
 
             </fieldset>
             <input type="submit" value="Submit">
             <input type="submit" value="Cancel">
             <hr>
         </form>
+        <script src="./js/updatePenguin.js"></script>
     </div>
+
     <div id="create"></div>
-        <form method="POST" id="createPenguin">
+        <form id="createPenguinForm">
             <legend>Add Penguin</legend>
             <fieldset>
 
             <label for="createName">Name:</label>
             <input type="text" id="createName" name="name" title="Name" required pattern="[A-Za-z]+(?: [A-Za-z]+)*">
         
-            <label for="createBirthday">Birthday:</label>
-            <input type="date" id="createBirthday" name="birthday" title="Birthday">
+            <label for="createdateOfBirth">Birth Date:</label>
+            <input type="date" id="createdateOfBirth" name="dateOfBirth" title="dateOfBirth" required min="1923-01-01" max="2005-12-31">
         
             <label for="createSex">Sex:</label>
-            <select id="createSex" name="sex" title="Sex">
+            <select id="createSex" name="sex" title="Sex" required>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
             </select>
         
             <label for="createSpecies">Species:</label>
-            <input type="text" id="createSpecies" name="species" title="Species">
+            <input type="text" id="createSpecies" name="species" title="Species" required pattern="[A-Za-z]+(?: [A-Za-z]+)*">
         
-            <label for="createHabitat">Habitat:</label>
-            <select id="createHabitat" name="habitat" title="Habitat">
-                <option value="costal">Costal</option>
-                <option value="arctic">Arctic</option>
-                <option value="ocean">Ocean</option>
-                <option value="tundra">Tundra</option>
+            <label for="createHabitatID">Habitat ID:</label>
+            <select id="createHabitatID" name="createHabitatID" title="Habitat ID">
+                <option value="Select"></option>
+                {{#each habitats}}
+                <option value="{{this.habitatID}}">{{this.habitatID}}</option>
+                {{/each}}
             </select>
-            <hr>
+            {{!--<hr>
             <div>
                 <label for="shows">Shows:</label>
                     <input type="checkbox" id="createShow1" name="employees" value="Show 1">
@@ -124,11 +128,13 @@
                     
                     <input type="checkbox" id="createShow3" name="employees" value="Show 3">
                     <label for="createShow3">Show 3</label>
-            </div>
+            </div> --}}
 
             </fieldset>
             <input type="submit" value="Submit">
             <input type="submit" value="Cancel">
         </form>
+
+        <script src="./js/createPenguin.js"></script>
     </div>
 </main>
