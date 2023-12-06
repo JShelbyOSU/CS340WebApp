@@ -15,7 +15,7 @@
 
             <tbody>
             {{#each data}}
-            <tr>
+            <tr data-value={{this.showID}}>
                 <td>{{this.showID}}</td>
                 <td>{{this.showName}}</td>
                 <td>{{this.date}}</td>
@@ -23,8 +23,8 @@
                 <td>{{this.endTime}}</td>
                 <td>{{this.ticketPrice}}</td>
                 <td>{{this.habitatID}}</td>
-                <td>{{this.name}}</td>
-                <td>{{this.lastName}}</td>
+                <td>{{this.employeeNames}}</td>
+                <td>{{this.penguinNames}}</td>
                 <td><button onclick="deleteShow({{this.showID}});">Delete</button></td>
             </tr>
             {{/each}}
@@ -71,14 +71,14 @@
                 <label for="updatePenguinID">Penguins:</label>
                     {{#each penguins}}
                     <input type="checkbox" id="updatePenguinID" name="updatePenguinID" value="{{this.penguinID}}">
-                    <label for="updatePenguinID">{{this.penguinID}}</label>
+                    <label for="updatePenguinID">{{this.name}}</label>
                     {{/each}}
             </div>
             <div style="float: left; width: 50%;">
                 <label for="updateEmployeeID">Employees:</label>
                     {{#each employees}}
                     <input type="checkbox" id="updateEmployeeID" name="updateEmployeeID" value="{{this.employeeID}}">
-                    <label for="updateEmployeeID">{{this.employeeID}}</label>
+                    <label for="updateEmployeeID">{{this.lastName}}</label>
                     {{/each}}
             </div>
             
@@ -121,15 +121,15 @@
             <div style="float: left; width: 50%;">
                 <label for="penguins">Penguins:</label>
                     {{#each penguins}}
-                    <input type="checkbox" id="createPenguinID" name="penguins" value="{{this.penguinID}}">
-                    <label for="createPenguinID">{{this.penguinID}}</label>
+                    <input type="checkbox" id="createPenguinID" name="createPenguinID" value="{{this.penguinID}}">
+                    <label for="createPenguinID">{{this.name}}</label>
                     {{/each}}
             </div>
             <div style="float: left; width: 50%;">
                 <label for="employees">Employees:</label>
                     {{#each employees}}
-                    <input type="checkbox" id="createEmployeeID" name="employees" value="{{this.employeeID}}">
-                    <label for="createEmployeeID">{{this.employeeID}}</label>
+                    <input type="checkbox" id="createEmployeeID" name="createEmployeeID" value="{{this.employeeID}}">
+                    <label for="createEmployeeID">{{this.lastName}}</label>
                     {{/each}}
             </div>
             </fieldset>
