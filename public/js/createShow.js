@@ -7,10 +7,8 @@
     Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/
 */
 
-// Get the objects we need to modify
+// Grab data from createShowForm
 let createShowForm = document.getElementById('createShowForm');
-
-// Modify the objects we need
 createShowForm.addEventListener("submit", function (e) {
     
     // Prevent the form from submitting
@@ -23,8 +21,10 @@ createShowForm.addEventListener("submit", function (e) {
     let inputEndTime = document.getElementById("createendTime");
     let inputTicketPrice = document.getElementById("createticketPrice");
     let inputHabitatID = document.getElementById("createhabitatID");
-    let inputPenguinID = document.getElementById("createPenguinID");
-    let inputEmployeeID = document.getElementById("createEmployeeID");
+
+    // Handle the checkboxes slightly differently
+    let inputPenguinID = document.querySelectorAll("input[name=createPenguinID]:checked");
+    let inputEmployeeID = document.querySelectorAll("input[name=createEmployeeID]:checked");
 
     // Get the values from the form fields
     let showNameValue = inputShowName.value;
@@ -33,8 +33,10 @@ createShowForm.addEventListener("submit", function (e) {
     let endTimeValue = inputEndTime.value;
     let ticketPriceValue = inputTicketPrice.value;
     let habitatIDValue = inputHabitatID.value;
-    let penguinIDValue = inputPenguinID.value;
-    let employeeIDValue = inputEmployeeID.value;
+
+    // Handle the checkboxes slightly differently
+    let penguinIDs = Array.from(inputPenguinID).map(input => input.value);
+    let employeeIDs = Array.from(inputEmployeeID).map(input => input.value);
 
     // Put our data we want to send in a javascript object
     let data = {
@@ -44,8 +46,8 @@ createShowForm.addEventListener("submit", function (e) {
         endTime: endTimeValue,
         ticketPrice: ticketPriceValue,
         habitatID: habitatIDValue,
-        penguinID: penguinIDValue,
-        employeeID: employeeIDValue
+        penguinID: penguinIDs,
+        employeeID: employeeIDs
     }
     
     // Setup our AJAX request
@@ -58,6 +60,7 @@ createShowForm.addEventListener("submit", function (e) {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
 
             // Add the new data to the table
+            //check xhttp.reponse first
             addRowToTable(xhttp.response);
 
             // Clear the input fields for another transaction
@@ -81,8 +84,7 @@ createShowForm.addEventListener("submit", function (e) {
 })
 
 
-// Creates a single row from an Object representing a single record from 
-// bsg_people
+// Adds the new row client side, so a refresh isn't needed
 addRowToTable = (data) => {
 
     // Get a reference to the current table on the page and clear it out.
@@ -97,6 +99,7 @@ addRowToTable = (data) => {
 
     // Create a row and 10 cells
     let row = document.createElement("TR");
+
     let showIDCell = document.createElement("TD");
     let showNameCell = document.createElement("TD");
     let dateCell = document.createElement("TD");
@@ -104,23 +107,26 @@ addRowToTable = (data) => {
     let endTimeCell = document.createElement("TD");
     let ticketPriceCell = document.createElement("TD");
     let habitatIDCell = document.createElement("TD");
-    let nameCell = document.createElement("TD");
     let penguinIDCell = document.createElement("TD");
     let employeeIDCell = document.createElement("TD");
     let deleteCell = document.createElement("TD");
 
+    // Change date to a more readable format
+    dateValue = new Date(newRow.date);
+    dateValue = dateValue.toLocaleDateString();
 
     // Fill the cells with correct data
     showIDCell.innerText = newRow.showID;
     showNameCell.innerText = newRow.showName;
-    dateCell.innerText = newRow.date;
+    dateCell.innerText = dateValue;
     startTimeCell.innerText = newRow.startTime;
     endTimeCell.innerText = newRow.endTime;
     ticketPriceCell.innerText = newRow.ticketPrice;
     habitatIDCell.innerText = newRow.habitatID;
-    penguinIDCell.innerText = newRow.penguinID;
-    employeeIDCell.innerText = newRow.employeeID;
+    penguinIDCell.innerText = newRow.penguinNames;
+    employeeIDCell.innerText = newRow.employeeNames;
 
+    // Create the delete button
     deleteCell = document.createElement("button");
     deleteCell.innerHTML = "Delete";
     deleteCell.onclick = function(){
@@ -135,9 +141,8 @@ addRowToTable = (data) => {
     row.appendChild(endTimeCell);
     row.appendChild(ticketPriceCell);
     row.appendChild(habitatIDCell);
-    row.appendChild(nameCell);
-    row.appendChild(penguinIDCell);
     row.appendChild(employeeIDCell);
+    row.appendChild(penguinIDCell);
     row.appendChild(deleteCell);
 
     // Add a row attribute so the deleteRow function can find a newly added row
@@ -145,7 +150,6 @@ addRowToTable = (data) => {
     
     // Add the row to the table
     currentTable.appendChild(row);
-
     let selectMenu = document.getElementById("selectShowID");
     let optionA = document.createElement("option");
     optionA.text = newRow.showID;

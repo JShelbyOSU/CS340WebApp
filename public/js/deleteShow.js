@@ -7,7 +7,10 @@
     Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/
 */
 
+
+// Handles deletion of a show
 function deleteShow(showID) {
+
     // Put our data we want to send in a javascript object
     let data = {
         id: showID
@@ -22,7 +25,7 @@ function deleteShow(showID) {
     xhttp.onreadystatechange = () => {
         if (xhttp.readyState == 4 && xhttp.status == 204) {
 
-            // Add the new data to the table
+            // Delete the row from the table
             deleteRow(showID);
 
         }
@@ -37,13 +40,18 @@ function deleteShow(showID) {
 
 function deleteRow(showID){
 
+    // Get a reference to the table
     let table = document.getElementById("showsTable");
+
+    // Iterate through the table until the correct row is found
     for (let i = 0, row; row = table.rows[i]; i++) {
-       //iterate through rows
-       //rows would be accessed using the "row" variable assigned in the for loop
-       if (table.rows[i].getAttribute("data-value") == showID) {
+
+       let row = table.rows[i];
+       if (row.getAttribute("data-value") == showID) {
+
             table.deleteRow(i);
             break;
+
        }
     }
 }

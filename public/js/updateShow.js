@@ -9,8 +9,6 @@
 
 // Get the objects we need to modify
 let updateShowForm = document.getElementById('updateShow');
-
-// Modify the objects we need
 updateShowForm.addEventListener("submit", function (e) {
    
     // Prevent the form from submitting
@@ -24,8 +22,10 @@ updateShowForm.addEventListener("submit", function (e) {
     let inputEndTime = document.getElementById("updateEndTime");
     let inputTicketPrice = document.getElementById("updateTicketPrice");
     let inputHabitatID = document.getElementById("updateHabitatID");
-    let inputPenguinID = document.getElementById("updatePenguinID");
-    let inputEmployeeID = document.getElementById("updateEmployeeID");
+
+    // Handle the checkboxes slightly differently
+    let inputPenguinID = document.querySelectorAll("input[name=updatePenguinID]:checked");
+    let inputEmployeeID = document.querySelectorAll("input[name=updateEmployeeID]:checked");
 
     // Get the values from the form fields
     let showIDValue = inputShowID.value;
@@ -35,17 +35,8 @@ updateShowForm.addEventListener("submit", function (e) {
     let endTimeValue = inputEndTime.value;
     let ticketPriceValue = inputTicketPrice.value;
     let habitatIDValue = inputHabitatID.value;
-    let penguinIDValue = inputPenguinID.value;
-    let employeeIDValue = inputEmployeeID.value;
-    
-    // currently the database table for bsg_people does not allow updating values to NULL
-    // so we must abort if being bassed NULL for homeworld
-
-    /* if (isNaN(homeworldValue)) 
-    {
-        return;
-    } */
-
+    let penguinIDs = Array.from(inputPenguinID).map(input => input.value);
+    let employeeIDs = Array.from(inputEmployeeID).map(input => input.value);
 
     // Put our data we want to send in a javascript object
     let data = {
@@ -56,8 +47,8 @@ updateShowForm.addEventListener("submit", function (e) {
         endTime: endTimeValue,
         ticketPrice: ticketPriceValue,
         habitatID: habitatIDValue,
-        penguinID: penguinIDValue,
-        employeeID: employeeIDValue,
+        penguinID: penguinIDs,
+        employeeID: employeeIDs,
     }
     
     // Setup our AJAX request
@@ -70,10 +61,7 @@ updateShowForm.addEventListener("submit", function (e) {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
 
             // Add the new data to the table
-            //updateRow(xhttp.response, fullNameValue);
-            updateRow(showIDValue, showNameValue, dateValue, startTimeValue,
-                endTimeValue, ticketPriceValue, habitatIDValue, penguinIDValue,
-                employeeIDValue)
+            updateRow(xhttp.response);
 
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
@@ -87,23 +75,23 @@ updateShowForm.addEventListener("submit", function (e) {
 })
 
 
-function updateRow(showIDValue, showNameValue, dateValue, startTimeValue,
-    endTimeValue, ticketPriceValue, habitatIDValue, penguinIDValue,
-    employeeIDValue){
+function updateRow(data){
 
-    //let parsedData = JSON.parse(data);
-    
+    // Create a reference to a table
     let table = document.getElementById("showsTable");
 
+    // Parse through the JSON data
+    let parsedData = JSON.parse(data);
+    let newRow = parsedData[parsedData.length - 1]
+
     for (let i = 0, row; row = table.rows[i]; i++) {
-       //iterate through rows
-       //rows would be accessed using the "row" variable assigned in the for loop
-       if (table.rows[i].getAttribute("data-value") == showIDValue) {
+       // Iterate through rows until the correct row is found
+       if (table.rows[i].getAttribute("data-value") == newRow.showID) {
 
             // Get the location of the row where we found the matching person ID
             let updateRowIndex = table.getElementsByTagName("tr")[i];
 
-            // Get td of homeworld value
+            // Get all tds
             let td1 = updateRowIndex.getElementsByTagName("td")[1];
             let td2 = updateRowIndex.getElementsByTagName("td")[2];
             let td3 = updateRowIndex.getElementsByTagName("td")[3];
@@ -113,15 +101,19 @@ function updateRow(showIDValue, showNameValue, dateValue, startTimeValue,
             let td7 = updateRowIndex.getElementsByTagName("td")[7];
             let td8 = updateRowIndex.getElementsByTagName("td")[8];
 
-            // Reassign homeworld to our value we updated to
-            td1.innerHTML = showNameValue;
+            // Make date more readable
+            dateValue = new Date(newRow.date);
+            dateValue = dateValue.toLocaleDateString();
+
+            // Set data to new data client side
+            td1.innerHTML = newRow.showName;
             td2.innerHTML = dateValue;
-            td3.innerHTML = startTimeValue;
-            td4.innerHTMl = endTimeValue;
-            td5.innerHTML = ticketPriceValue;
-            td6.innerHTML = habitatIDValue;
-            td7.innerHTML = penguinIDValue;
-            td8.innerHTML = employeeIDValue;
+            td3.innerHTML = newRow.startTime;
+            td4.innerHTMl = newRow.endTime;
+            td5.innerHTML = newRow.ticketPrice;
+            td6.innerHTML = newRow.habitatID;
+            td7.innerHTML = newRow.employeeNames;
+            td8.innerHTML = newRow.penguinNames;
        }
     }
 }
