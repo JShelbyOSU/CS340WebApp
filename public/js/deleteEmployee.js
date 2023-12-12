@@ -8,7 +8,7 @@
 */
 
 // deleteEmployee.js
-
+// Adapted from OSU CS340 ECapus NodeJS Starter App
 function deleteEmployee(employeeID) {
     // Put our data we want to send in a javascript object
     let data = {
@@ -34,11 +34,11 @@ function deleteEmployee(employeeID) {
     xhttp.send(JSON.stringify(data));
 }
 
+// Adapted from OSU CS340 ECapus NodeJS Starter App
 function deleteRow(employeeID){
     let table = document.getElementById("employeesTable");
     for (let i = 0, row; row = table.rows[i]; i++) {
-       //iterate through rows
-       //rows would be accessed using the "row" variable assigned in the for loop
+       // Iterate through each row
        if (table.rows[i].getAttribute("data-value") == employeeID) {
             table.deleteRow(i);
             break;

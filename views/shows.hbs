@@ -67,14 +67,14 @@
                 {{/each}}
             </select>
             <hr>
-            <div style="float: left; width: 50%;">
+            <div>
                 <label for="updatePenguinID">Penguins:</label>
                     {{#each penguins}}
                     <input type="checkbox" id="updatePenguinID" name="updatePenguinID" value="{{this.penguinID}}">
                     <label for="updatePenguinID">{{this.name}}</label>
                     {{/each}}
             </div>
-            <div style="float: left; width: 50%;">
+            <div>
                 <label for="updateEmployeeID">Employees:</label>
                     {{#each employees}}
                     <input type="checkbox" id="updateEmployeeID" name="updateEmployeeID" value="{{this.employeeID}}">
@@ -118,14 +118,14 @@
                 {{/each}}
             </select>
             <hr>
-            <div style="float: left; width: 50%;">
+            <div>
                 <label for="penguins">Penguins:</label>
                     {{#each penguins}}
                     <input type="checkbox" id="createPenguinID" name="createPenguinID" value="{{this.penguinID}}">
                     <label for="createPenguinID">{{this.name}}</label>
                     {{/each}}
             </div>
-            <div style="float: left; width: 50%;">
+            <div>
                 <label for="employees">Employees:</label>
                     {{#each employees}}
                     <input type="checkbox" id="createEmployeeID" name="createEmployeeID" value="{{this.employeeID}}">

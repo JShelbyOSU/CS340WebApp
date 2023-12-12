@@ -41,7 +41,7 @@
 
             <label for="selectEmployeeID">ID:</label>
             <select id="selectEmployeeID" name="selectEmployeeID" title="Employee ID" required>
-                <option value="">Select</option>
+                <option value=""></option>
                 {{#each data}}
                 <option value="{{this.employeeID}}">{{this.employeeID}}</option>
                 {{/each}}
@@ -60,11 +60,11 @@
             <input type="date" id="updateHireDate" name="hireDate" title="Hire Date" required min="1900-01-01" max="2030-12-31">
         
             <label for="updateSalary">Salary:</label>
-            <input type="number" step="any" id="updateSalary" name="salary" title="Salary" required min="0" max="999999" style="width: 75px;">
+            <input type="number" step="any" id="updateSalary" name="salary" title="Salary" required min="0" max="999999">
         
             <label for="updateHabitatID">Habitat ID:</label>
             <select id="updateHabitatID" name="habitatID" title="Habitat ID" required>
-                <option value="">Select</option>
+                <option value=""></option>
                 {{#each habitats}}
                 <option value="{{this.habitatID}}">{{this.habitatID}}</option>
                 {{/each}}
@@ -72,7 +72,7 @@
             
             </fieldset>
             <input type="submit" value="Submit">
-            <input type="button" value="Cancel" onclick="document.getElementById('updateEmployee').reset();">
+            <input type="reset" value="Cancel">
             
             <hr>
         </form>
@@ -97,11 +97,11 @@
             <input type="date" id="createHireDate" name="hireDate" title="Hire Date" required min="1900-01-01" max="2030-12-31">
         
             <label for="createSalary">Salary:</label>
-            <input type="number" step="any" id="createSalary" name="salary" title="Salary" required min="0" max="999999" style="width: 75px;">
+            <input type="number" step="any" id="createSalary" name="salary" title="Salary" required min="0" max="999999">
         
             <label for="createHabitatID">Habitat ID:</label>
             <select id="createHabitatID" name="habitatID" title="Habitat ID" required>
-                <option value="">Select</option>
+                <option value=""></option>
                 {{#each habitats}}
                 <option value="{{this.habitatID}}">{{this.habitatID}}</option>
                 {{/each}}

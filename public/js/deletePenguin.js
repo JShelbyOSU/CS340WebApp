@@ -7,6 +7,7 @@
     Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/
 */
 
+// Adapted from OSU CS340 ECapus NodeJS Starter App
 function deletePenguin(penguinID) {
     // Put our data we want to send in a javascript object
     let data = {
@@ -34,7 +35,7 @@ function deletePenguin(penguinID) {
     xhttp.send(JSON.stringify(data));
 }
 
-
+// Adapted from OSU CS340 ECapus NodeJS Starter App
 function deleteRow(penguinID){
 
     let table = document.getElementById("penguinsTable");

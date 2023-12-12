@@ -11,6 +11,7 @@
 let updateEmployeeForm = document.getElementById('updateEmployeeForm');
 
 // Modify the objects we need
+// Adapted from OSU CS340 ECapus NodeJS Starter App
 updateEmployeeForm.addEventListener("submit", function (e) {
    
     // Prevent the form from submitting
@@ -74,6 +75,7 @@ updateEmployeeForm.addEventListener("submit", function (e) {
 
 })
 
+// Adapted from OSU CS340 ECapus NodeJS Starter App
 function updateEmployeeRow(employeeID, firstNameValue, lastNameValue, positionValue, hireDateValue, salaryValue, habitatValue){
 
     let table = document.getElementById("employeesTable");

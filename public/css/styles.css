@@ -1,0 +1,132 @@
+body, h1, main, header, footer, head, nav {
+    margin: 15px;
+    padding: 0;
+    max-width: 1500px;
+}
+
+body {
+    font-family: Cambria, sans-serif;
+    background-color: #f2f2f2;
+}
+
+h1, h2 {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+h1 {
+    margin: 0px;
+    font-size: 28px;
+    color: #d73f09; 
+}
+
+h2 {
+    font-size: 24px;
+    color: #000; 
+    margin-bottom: 8px;
+}
+
+p {
+    font-size: 20px;
+    color: #666; 
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+nav {
+    background-color: #000; 
+    padding: 10px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px;
+}
+
+nav a:hover {
+    background-color: #d73f09;
+    text-decoration: none;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 18px;
+}
+
+th {
+    background-color: #f2f2f2; 
+    color:#d73f09
+}
+
+form, select, input[type="date"], input[type="time"] { 
+    margin-bottom: 16px;
+    border: none;
+}
+
+label, legend {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+legend {
+    font-size: 20px;
+    color: #d73f09;
+    margin-bottom: 8px;
+}
+
+input[type="text"], input[type="number"], textarea, select, input[type="date"], input[type="time"] {
+    width: 150px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 8px;
+    margin-right: 20px;
+}
+
+input[type="date"], input[type="time"], select {
+    width: auto;
+}
+
+input[type="number"] {
+    width: 75px;
+}
+
+input[type="checkbox"] {
+    margin-left: 15px;
+}
+
+button, input[type="submit"], input[type="reset"] {
+    padding: 8px 16px;
+    background-color: #d73f09;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+button:hover, input[type="submit"]:hover, input[type="reset"]:hover {
+    background-color: #fff;
+    color: #d73f09;
+    border: 1px inset #000;
+    padding: 7px 15px;
+}
+
+label {
+    display: inline-block;
+}
+
+hr {
+    margin: 16px 0;
+    border: 1px dashed #333
+}

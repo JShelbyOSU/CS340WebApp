@@ -17,7 +17,7 @@ var app     = express();
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static('public'))
-PORT        = 3065;
+PORT        = 2955;
 
 /* 
     HANDLEBARS - Adapted from OSU CS340 ECapus NodeJS Starter App
@@ -352,6 +352,7 @@ app.put('/updateShowAjax', function(req,res,next){
     )}})
 });
 
+// Handles "get" for penguins, including Read
 app.get('/penguins', function(req, res)
     {
         let query1 = "SELECT * FROM Penguins;"
@@ -377,141 +378,146 @@ app.get('/penguins', function(req, res)
         
     });
 
-    app.post('/createPenguinAjax', function(req, res) 
-    {
-        // Capture the incoming data and parse it back to a JS object
-        let data = req.body;
-    
-        let sex = data.sex;
-        if (sex == null)
-        {sex = 'NULL'}
-        else if (sex == 'male')
-        {sex = 0}
-        else if (sex == 'female')
-        {sex = 1}
+// Handles Penguin creation from the Penguins page
+app.post('/createPenguinAjax', function(req, res) 
+{
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
 
+    let sex = data.sex;
+    if (sex == null)
+    {sex = 'NULL'}
+    else if (sex == 'male')
+    {sex = 0}
+    else if (sex == 'female')
+    {sex = 1}
+
+
+    let habitatID = parseInt(data.habitatID);
+    if (isNaN(habitatID))
+    {
+        habitatID = 'NULL'
+    }
+
+    let dateOfBirth = data.dateOfBirth;
+    dateOfBirth = new Date(dateOfBirth);
+    dateOfBirth = dateOfBirth.toISOString().slice(0, 10);
     
-        let habitatID = parseInt(data.habitatID);
-        if (isNaN(habitatID))
+    // Create the query and run it on the database
+    query1 = `INSERT INTO Penguins (name, dateOfBirth, sex, species, habitatID) VALUES ('${data.name}', '${dateOfBirth}', ${sex}, '${data.species}', ${habitatID})`;
+    db.pool.query(query1, function(error, rows, fields){
+
+        if (error) {
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else
         {
-            habitatID = 'NULL'
+            // If there was no error, perform a SELECT * on Penguins
+            query2 = `SELECT * FROM Penguins;`;
+            db.pool.query(query2, function(error, rows, fields){
+
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                else
+                {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+
+
+// Handles the deletion of Penguins from the Penguins page
+app.delete('/deletePenguinAjax/', function(req,res,next){
+    let data = req.body;
+    let penguinID = parseInt(data.id);
+    let deleteShowsPenguin = `DELETE FROM Penguins_Shows WHERE penguinID = ?`;
+    let deletePenguin= `DELETE FROM Penguins WHERE penguinID = ?`;
+    
+    
+        // Run the 1st query
+        db.pool.query(deleteShowsPenguin, [penguinID], function(error, rows, fields){
+        if (error) {
+
+        // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+        console.log(error);
+        res.sendStatus(400);
         }
 
-        let dateOfBirth = data.dateOfBirth;
-        dateOfBirth = new Date(dateOfBirth);
-        dateOfBirth = dateOfBirth.toISOString().slice(0, 10);
-        
-        // Create the query and run it on the database
-        query1 = `INSERT INTO Penguins (name, dateOfBirth, sex, species, habitatID) VALUES ('${data.name}', '${dateOfBirth}', ${sex}, '${data.species}', ${habitatID})`;
-        db.pool.query(query1, function(error, rows, fields){
-    
-            if (error) {
-                console.log(error)
-                res.sendStatus(400);
-            }
-            else
-            {
-                // If there was no error, perform a SELECT * on Penguins
-                query2 = `SELECT * FROM Penguins;`;
-                db.pool.query(query2, function(error, rows, fields){
-    
-                    if (error) {
-                        console.log(error);
-                        res.sendStatus(400);
-                    }
-                    else
-                    {
-                        res.send(rows);
-                    }
-                })
-            }
-        })
-    });
+        else
+        {
+            // Run the second query
+            db.pool.query(deletePenguin, [penguinID], function(error, rows, fields) {
 
-    app.delete('/deletePenguinAjax/', function(req,res,next){
-        let data = req.body;
-        let penguinID = parseInt(data.id);
-        let deleteShowsPenguin = `DELETE FROM Penguins_Shows WHERE penguinID = ?`;
-        let deletePenguin= `DELETE FROM Penguins WHERE penguinID = ?`;
-      
-      
-            // Run the 1st query
-            db.pool.query(deleteShowsPenguin, [penguinID], function(error, rows, fields){
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    res.sendStatus(204);
+                }
+            })
+        }
+    })});
+
+// Handles updating Penguin from the Penguins page
+app.put('/updatePenguinAjax', function(req,res,next){
+let data = req.body;
+
+let penguinID = parseInt(data.id);
+let name = data.name;
+let dateOfBirth = data.dateOfBirth;
+let sex = data.sex;
+let species = data.species;
+let habitatID = parseInt(data.habitatID);
+
+if (sex == null)
+{sex = 'NULL'}
+else if (sex == 'male')
+{sex = 0}
+else if (sex == 'female')
+{sex = 1}
+
+dateOfBirth = new Date(dateOfBirth);
+dateOfBirth = dateOfBirth.toISOString().slice(0, 10);
+
+let queryUpdatePenguin = `UPDATE Penguins 
+                    SET name = ?, 
+                        dateOfBirth = ?, 
+                        sex = ?, 
+                        species = ?, 
+                        habitatID = ? 
+                    WHERE Penguins.penguinID = ?`;
+
+let selectPenguin = `SELECT * FROM Penguins WHERE penguinID = ?`
+
+        // Run the 1st query
+        db.pool.query(queryUpdatePenguin, [name, dateOfBirth, sex, species, habitatID, penguinID], function(error, rows, fields){
             if (error) {
 
             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
             console.log(error);
             res.sendStatus(400);
             }
-
             else
             {
                 // Run the second query
-                db.pool.query(deletePenguin, [penguinID], function(error, rows, fields) {
+                db.pool.query(selectPenguin, [penguinID], function(error, rows, fields) {
 
                     if (error) {
                         console.log(error);
                         res.sendStatus(400);
                     } else {
-                        res.sendStatus(204);
+                        res.send(rows);
                     }
                 })
             }
-      })});
+})});
 
-      app.put('/updatePenguinAjax', function(req,res,next){
-        let data = req.body;
-      
-        let penguinID = parseInt(data.id);
-        let name = data.name;
-        let dateOfBirth = data.dateOfBirth;
-        let sex = data.sex;
-        let species = data.species;
-        let habitatID = parseInt(data.habitatID);
-      
-        if (sex == null)
-        {sex = 'NULL'}
-        else if (sex == 'male')
-        {sex = 0}
-        else if (sex == 'female')
-        {sex = 1}
-
-        dateOfBirth = new Date(dateOfBirth);
-        dateOfBirth = dateOfBirth.toISOString().slice(0, 10);
-
-        let queryUpdatePenguin = `UPDATE Penguins 
-                          SET name = ?, 
-                              dateOfBirth = ?, 
-                              sex = ?, 
-                              species = ?, 
-                              habitatID = ? 
-                          WHERE Penguins.penguinID = ?`;
-
-        let selectPenguin = `SELECT * FROM Penguins WHERE penguinID = ?`
-      
-              // Run the 1st query
-              db.pool.query(queryUpdatePenguin, [name, dateOfBirth, sex, species, habitatID, penguinID], function(error, rows, fields){
-                  if (error) {
-      
-                  // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-                  console.log(error);
-                  res.sendStatus(400);
-                  }
-                  else
-                  {
-                      // Run the second query
-                      db.pool.query(selectPenguin, [penguinID], function(error, rows, fields) {
-      
-                          if (error) {
-                              console.log(error);
-                              res.sendStatus(400);
-                          } else {
-                              res.send(rows);
-                          }
-                      })
-                  }
-      })});
-
+// Handles "get" for the Employees page
 app.get('/employees', function(req, res)
 {
     let query1 = "SELECT * FROM Employees;"
@@ -535,6 +541,7 @@ app.get('/employees', function(req, res)
     })
 });
 
+// Handles creation of new Employees
 app.post('/createEmployeeAjax', function(req, res) 
 {
     // Capture the incoming data and parse it back to a JS object
@@ -553,8 +560,7 @@ app.post('/createEmployeeAjax', function(req, res)
     query1 = `INSERT INTO Employees (firstName, lastName, position, hireDate, salary, habitatID) VALUES (?, ?, ?, ?, ?, ?);`;
 
     db.pool.query(query1, [data.firstName, data.lastName, data.position, hireDate, data.salary, habitatID], function(error, rows, fields){
-        // Your error handling and follow-up code here
-
+        // Error handling
         if (error) {
             console.log(error)
             res.sendStatus(400);
@@ -578,6 +584,7 @@ app.post('/createEmployeeAjax', function(req, res)
     })
 });
 
+// Handles Update on Employees
 app.put('/updateEmployeeAjax', function(req,res,next){
     let data = req.body;
 
@@ -623,6 +630,7 @@ app.put('/updateEmployeeAjax', function(req,res,next){
     });
 });
 
+// Handles Delete for Employee
 app.delete('/deleteEmployeeAjax/', function(req,res,next){
     let data = req.body;
     let employeeID = parseInt(data.id);
@@ -652,14 +660,14 @@ app.delete('/deleteEmployeeAjax/', function(req,res,next){
 })});
 
 /*
-    LISTENER
+    LISTENER - Adapted from OSU CS340 ECapus NodeJS Starter App
 */
 app.listen(PORT, function(){            // This is the basic syntax for what is called the 'listener' which receives incoming requests on the specified PORT.
     console.log('Express started on http://localhost:' + PORT + '; press Ctrl-C to terminate.')
 });
 
 /*
-    DATABASE
+    DATABASE - Adapted from OSU CS340 ECapus NodeJS Starter App
 */
 
 var db = require('./database/db-connector');const { devNull } = require('os');

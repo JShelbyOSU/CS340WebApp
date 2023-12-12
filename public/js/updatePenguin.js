@@ -11,6 +11,7 @@
 let updatePenguinForm = document.getElementById('updatePenguin');
 
 // Modify the objects we need
+// Adapted from OSU CS340 ECapus NodeJS Starter App
 updatePenguinForm.addEventListener("submit", function (e) {
    
     // Prevent the form from submitting
@@ -32,15 +33,6 @@ updatePenguinForm.addEventListener("submit", function (e) {
     let sexValue = inputSex.value;
     let speciesValue = inputSpecies.value;
     let habitatValue = inputHabitat.value;
-    
-    //let habitatValue = inputHabitat.value;
-    
-    // check if the habitat id is a number, if not, abort
-    //if (isNaN(habitatValue)) 
-    //{
-    //    return;
-    //}
-
     
     // Put our data we want to send in a javascript object
     let data = {
@@ -75,6 +67,7 @@ updatePenguinForm.addEventListener("submit", function (e) {
 
 })
 
+// Adapted from OSU CS340 ECapus NodeJS Starter App
 function updatePenguinRow(penguinID, nameValue, dateOfBirthValue, sexValue, speciesValue, habitatValue){
 
     let table = document.getElementById("penguinsTable");

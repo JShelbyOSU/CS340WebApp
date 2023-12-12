@@ -8,6 +8,7 @@
 */
 
 // Get the objects we need to modify
+// Adapted from OSU CS340 ECapus NodeJS Starter App
 let addPenguinForm = document.getElementById('createPenguinForm');
 
 // Modify the objects we need
@@ -69,6 +70,7 @@ addPenguinForm.addEventListener("submit", function (e) {
 })
 
 // Creates a single row from an Object representing a single record from penguins
+// Adapted from OSU CS340 ECapus NodeJS Starter App
 addRowToTable = (data) => {
 
     // Get a reference to the current table on the page and clear it out.

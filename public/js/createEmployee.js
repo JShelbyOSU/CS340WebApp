@@ -11,6 +11,7 @@
 let addEmployeeForm = document.getElementById('createEmployeeForm');
 
 // Modify the objects we need
+// Adapted from OSU CS340 ECapus NodeJS Starter App
 addEmployeeForm.addEventListener("submit", function (e) {
     
     // Prevent the form from submitting
@@ -73,6 +74,7 @@ addEmployeeForm.addEventListener("submit", function (e) {
 })
 
 // Creates a single row from an Object representing a single record from Employees
+// Adapted from OSU CS340 ECapus NodeJS Starter App
 addRowToEmployeeTable = (data) => {
 
     let currentTable = document.getElementById("employeesTable");
